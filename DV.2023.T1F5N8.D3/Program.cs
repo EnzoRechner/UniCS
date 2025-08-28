@@ -1,3 +1,5 @@
+using DV._2023.T1F5N8.ITEHA.D3.Services;
+
 namespace DV._2023.T1F5N8.D3
 {
     public class Program
@@ -8,6 +10,7 @@ namespace DV._2023.T1F5N8.D3
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<EmployeeService>();
 
             var app = builder.Build();
 
@@ -24,11 +27,12 @@ namespace DV._2023.T1F5N8.D3
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Auth}/{action=Login}/{id?}");
 
             app.Run();
         }
